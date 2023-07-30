@@ -138,6 +138,9 @@ function changeTheme() {
   document.querySelectorAll('.day-night-text').forEach(function (text) {
     text.classList.toggle('night');
   });
+  document.querySelectorAll('.day-night-svg').forEach(function (text) {
+    text.classList.toggle('night');
+  });
 }
 
 // BUTTON SCROLL TO TOP
@@ -147,6 +150,48 @@ document.getElementById('btnTop').addEventListener('click', function () {
     behavior: 'smooth'
   });
 });
+
+// const test =
+
+document.getElementById('lang').addEventListener('click', function () {
+  return console.log('document');
+});
+
+// console.log(test)
+
+//Change lang
+
+// const select = document.querySelector('select')
+// const allLang = ['en', 'ru', 'tm']
+
+// select.addEventListener('change', changeURLLanguage)
+// //Перенаправить на url c указанием языка
+
+// function changeURLLanguage() {
+// 	let lang = select.value
+// 	location.href = window.location.pathname + '#' + lang
+// 	location.reload()
+// }
+
+// function changeLanguage() {
+// 	let hash = window.location.hash
+// 	hash = hash.substring(1)
+// 	console.log(hash)
+// 	if (!allLang.includes(hash)) {
+// 		location.href = window.location.pathname + '#en'
+// 		location.reload()
+// 	}
+// 	select.value = hash
+// 	//document.querySelector('title').innerHTML = langArr['unit'][hash];
+// 	for (let key in langArr) {
+// 		let elem = document.querySelector('.lng-' + key)
+// 		if (elem) {
+// 			elem.innerHTML = langArr[key][hash]
+// 		}
+// 	}
+// }
+
+// changeLanguage()
 },{}],"C:/Users/LeoBlack/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -172,7 +217,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "4730" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "4362" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
