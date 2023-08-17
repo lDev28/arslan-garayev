@@ -117,90 +117,155 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"C:/Users/LeoBlack/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
-var bundleURL = null;
-function getBundleURLCached() {
-  if (!bundleURL) {
-    bundleURL = getBundleURL();
-  }
-  return bundleURL;
+})({"index.js":[function(require,module,exports) {
+function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
+var wrapperBlock = document.querySelector('.wrapper');
+
+// BURGER MENU
+document.getElementById('burgerMenu').addEventListener('click', function () {
+  document.querySelector('.header__burger').classList.toggle('active');
+  document.querySelector('.header__menu').classList.toggle('active');
+  document.querySelector('.header__burger-elem').classList.toggle('active');
+  document.body.classList.toggle('active');
+});
+
+// DAY-NIGHT
+document.getElementById('dayNightBtn').addEventListener('click', changeTheme);
+function changeTheme() {
+  // document.querySelector('.day-night-btn__anim').classList.toggle('light')
+  document.getElementById('dayNightBtn').classList.toggle('active');
+  document.getElementById('btnTop').classList.toggle('night');
+  document.querySelectorAll('.day-night').forEach(function (block) {
+    block.classList.toggle('night');
+  });
+  document.querySelectorAll('.day-night-text').forEach(function (text) {
+    text.classList.toggle('night');
+  });
+  document.querySelectorAll('.day-night-svg').forEach(function (text) {
+    text.classList.toggle('night');
+  });
+  document.querySelectorAll('.day-night-input').forEach(function (text) {
+    text.classList.toggle('night');
+  });
+  document.querySelectorAll('.portfolio__btn-text').forEach(function (text) {
+    text.classList.toggle('light');
+  });
+  document.querySelectorAll('.bottom-gradient').forEach(function (text) {
+    text.classList.toggle('light');
+  });
+  document.querySelectorAll('.top-gradient').forEach(function (text) {
+    text.classList.toggle('light');
+  });
+  // done()
 }
-function getBundleURL() {
-  // Attempt to find the URL of the current script and use that as the base URL
-  try {
-    throw new Error();
-  } catch (err) {
-    var matches = ('' + err.stack).match(/(https?|file|ftp|chrome-extension|moz-extension):\/\/[^)\n]+/g);
-    if (matches) {
-      return getBaseURL(matches[0]);
+// console.log(document.querySelector('.top-gradient'))
+changeTheme();
+
+// function done() {
+// 	document.querySelector('.day-night-btn__anim').style.bottom = '-100%'
+// 	document.querySelector('.day-night-btn__anim').style.right = '-100%'
+// 	setTimeout(() => {
+// 		document.querySelector('.day-night-btn__anim').style.opacity = '0'
+// 		document.querySelector('.day-night-btn__anim').style.display = 'none'
+// 	}, 500)
+// }
+
+// BUTTON SCROLL TO TOP
+document.getElementById('btnTop').addEventListener('click', function () {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
+});
+
+// SCROLL ANIMATION
+function onEntry(entry) {
+  entry.forEach(function (change) {
+    if (change.isIntersecting) {
+      change.target.classList.add('show');
+    } else {
+      change.target.classList.remove('show');
     }
+  });
+}
+var options = {
+  threshold: [0.5]
+};
+var observer = new IntersectionObserver(onEntry, options);
+var elements = document.querySelectorAll('.portfolio__elem');
+var _iterator = _createForOfIteratorHelper(elements),
+  _step;
+try {
+  for (_iterator.s(); !(_step = _iterator.n()).done;) {
+    var elm = _step.value;
+    observer.observe(elm);
   }
-  return '/';
+
+  // VISIBILITY OF GRADIENTS
+} catch (err) {
+  _iterator.e(err);
+} finally {
+  _iterator.f();
 }
-function getBaseURL(url) {
-  return ('' + url).replace(/^((?:https?|file|ftp|chrome-extension|moz-extension):\/\/.+)?\/[^/]+(?:\?.*)?$/, '$1') + '/';
-}
-exports.getBundleURL = getBundleURLCached;
-exports.getBaseURL = getBaseURL;
-},{}],"C:/Users/LeoBlack/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/css-loader.js":[function(require,module,exports) {
-var bundle = require('./bundle-url');
-function updateLink(link) {
-  var newLink = link.cloneNode();
-  newLink.onload = function () {
-    link.remove();
-  };
-  newLink.href = link.href.split('?')[0] + '?' + Date.now();
-  link.parentNode.insertBefore(newLink, link.nextSibling);
-}
-var cssTimeout = null;
-function reloadCSS() {
-  if (cssTimeout) {
-    return;
-  }
-  cssTimeout = setTimeout(function () {
-    var links = document.querySelectorAll('link[rel="stylesheet"]');
-    for (var i = 0; i < links.length; i++) {
-      if (bundle.getBaseURL(links[i].href) === bundle.getBundleURL()) {
-        updateLink(links[i]);
-      }
-    }
-    cssTimeout = null;
-  }, 50);
-}
-module.exports = reloadCSS;
-},{"./bundle-url":"C:/Users/LeoBlack/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"css/settings.scss":[function(require,module,exports) {
-var reloadCSS = require('_css_loader');
-module.hot.dispose(reloadCSS);
-module.hot.accept(reloadCSS);
-},{"./..\\fonts\\Montserrat.ttf":[["Montserrat.d5620538.ttf","fonts/Montserrat.ttf"],"fonts/Montserrat.ttf"],"_css_loader":"C:/Users/LeoBlack/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"css/header.scss":[function(require,module,exports) {
-var reloadCSS = require('_css_loader');
-module.hot.dispose(reloadCSS);
-module.hot.accept(reloadCSS);
-},{"./settings.scss":"css/settings.scss","_css_loader":"C:/Users/LeoBlack/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"css/main.scss":[function(require,module,exports) {
-var reloadCSS = require('_css_loader');
-module.hot.dispose(reloadCSS);
-module.hot.accept(reloadCSS);
-},{"_css_loader":"C:/Users/LeoBlack/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"css/sections.scss":[function(require,module,exports) {
-var reloadCSS = require('_css_loader');
-module.hot.dispose(reloadCSS);
-module.hot.accept(reloadCSS);
-},{"_css_loader":"C:/Users/LeoBlack/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"css/contacts.scss":[function(require,module,exports) {
-var reloadCSS = require('_css_loader');
-module.hot.dispose(reloadCSS);
-module.hot.accept(reloadCSS);
-},{"_css_loader":"C:/Users/LeoBlack/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"css/education.scss":[function(require,module,exports) {
-var reloadCSS = require('_css_loader');
-module.hot.dispose(reloadCSS);
-module.hot.accept(reloadCSS);
-},{"_css_loader":"C:/Users/LeoBlack/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"css/portfolio.scss":[function(require,module,exports) {
-var reloadCSS = require('_css_loader');
-module.hot.dispose(reloadCSS);
-module.hot.accept(reloadCSS);
-},{"_css_loader":"C:/Users/LeoBlack/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"style.scss":[function(require,module,exports) {
-var reloadCSS = require('_css_loader');
-module.hot.dispose(reloadCSS);
-module.hot.accept(reloadCSS);
-},{"./css/header.scss":"css/header.scss","./css/main.scss":"css/main.scss","./css/sections.scss":"css/sections.scss","./css/contacts.scss":"css/contacts.scss","./css/education.scss":"css/education.scss","./css/portfolio.scss":"css/portfolio.scss","_css_loader":"C:/Users/LeoBlack/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"C:/Users/LeoBlack/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+var main = document.getElementById('main');
+var topGradient = document.getElementById('topGradient');
+var bottomGradient = document.getElementById('bottomGradient');
+document.body.onscroll = function () {
+  window.pageYOffset - main.offsetHeight + 60 > topGradient.scrollHeight ? topGradient.style.opacity = '1' : topGradient.style.opacity = '0';
+  window.pageYOffset - 100 > bottomGradient.scrollHeight ? bottomGradient.style.opacity = '1' : bottomGradient.style.opacity = '0';
+};
+
+//Change lang
+
+// document
+// 	.getElementById('lang')
+// 	.addEventListener('click', () => console.log('document'))
+
+// const select = document.querySelector('select')
+// const allLang = ['en', 'ru', 'tm']
+
+// select.addEventListener('change', changeURLLanguage)
+// //Перенаправить на url c указанием языка
+
+// function changeURLLanguage() {
+// 	let lang = select.value
+// 	location.href = window.location.pathname + '#' + lang
+// 	location.reload()
+// }
+
+// function changeLanguage() {
+// 	let hash = window.location.hash
+// 	hash = hash.substring(1)
+// 	console.log(hash)
+// 	if (!allLang.includes(hash)) {
+// 		location.href = window.location.pathname + '#en'
+// 		location.reload()
+// 	}
+// 	select.value = hash
+// 	//document.querySelector('title').innerHTML = langArr['unit'][hash];
+// 	for (let key in langArr) {
+// 		let elem = document.querySelector('.lng-' + key)
+// 		if (elem) {
+// 			elem.innerHTML = langArr[key][hash]
+// 		}
+// 	}
+// }
+
+// changeLanguage()
+
+// var prevScrollpos = (wrapperBlock.onscroll = function () {
+// 	var currentScrollPos = wrapperBlock.pageYOffset
+// 	if (prevScrollpos > currentScrollPos) {
+// 		document.getElementById('bottomGradient').style.bottom = '-100px'
+// 	} else {
+// 		document.getElementById('bottomGradient').style.top = 'calc(100% + 100px)'
+// 	}
+// 	prevScrollpos = currentScrollPos
+// 	console.log(wrapperBlock.pageYOffset)
+// })
+},{}],"C:/Users/LeoBlack/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -225,7 +290,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "3385" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50369" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
@@ -369,5 +434,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["C:/Users/LeoBlack/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js"], null)
-//# sourceMappingURL=/style.97fcb138.js.map
+},{}]},{},["C:/Users/LeoBlack/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","index.js"], null)
+//# sourceMappingURL=/src.e31bb0bc.js.map
